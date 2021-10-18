@@ -1,5 +1,7 @@
+// It's a package that allows us to create token for authentications
 const jwt = require('jsonwebtoken');
 
+// It checks the authentication 
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];

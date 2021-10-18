@@ -1,9 +1,11 @@
+// It's a package that allows us to encrypt the password
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
+// It's a package that allows us to create token for authentications
+const jwt = require('jsonwebtoken'); 
 
 const User = require('../models/user')
 
+// Post request controller for signup
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
@@ -18,7 +20,7 @@ exports.signup = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
-
+// Post request controller for login
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {

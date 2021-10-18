@@ -1,7 +1,7 @@
 const Sauce = require('../models/sauce');
-const fs = require('fs');
+const fs = require('fs'); // It's a native module that allows us to modify the file system
 
-
+// Post request controller 
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce)
     delete sauceObject._id;
@@ -18,6 +18,7 @@ exports.createSauce = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
+// Put request controller 
 exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ?
         {
@@ -29,6 +30,7 @@ exports.modifySauce = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
+// Delete request controller 
 exports.deleteOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
@@ -42,18 +44,21 @@ exports.deleteOneSauce = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
+// Get request controller for a specific id of an element
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => res.status(200).json(sauce))
         .catch(error => res.status(400).json({ error }));
 };
 
+// Get request controller for all elements 
 exports.getAllSauces = (req, res, next) => {
     Sauce.find()
         .then(sauces => res.status(200).json(sauces))
         .catch(error => res.status(400).json({ error }));
 };
 
+// Post request controller for likes and dislikes
 exports.likesAndDislikes = (req, res, next) => {
     let userId = req.body.userId;
     let like = req.body.like;

@@ -13,5 +13,5 @@ const suaceSchema = mongoose.Schema({
     usersLiked: { type: Array, requird: false },
     usersDisliked: { type: Array, requird: false }
 });
-
+// Then we export it as model called Sauce
 module.exports = mongoose.model('Sauce', suaceSchema);
