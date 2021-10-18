@@ -1,11 +1,12 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const path = require('path');
+const express = require('express'); // Importing the express framework
+const bodyParser = require('body-parser'); // This package allows us to read the body of the request
+const mongoose = require('mongoose'); // It facilates the interactions with the database
+const path = require('path'); // This module provides utilities for files and directories paths
 
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 
+// Using the connect function to connect to our mongoDB database
 mongoose.connect('mongodb+srv://new-user-1:n8jdkdmabrEJGVN4@cluster0.jmsjk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   { useNewUrlParser: true, 
     useUnifiedTopology: true
@@ -16,6 +17,7 @@ mongoose.connect('mongodb+srv://new-user-1:n8jdkdmabrEJGVN4@cluster0.jmsjk.mongo
 
 const app = express();
 
+// Makes the api accesible for the frontend app
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -23,6 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// We use the method json to transfom the body of the request to a json object
 app.use(bodyParser.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
