@@ -7,14 +7,14 @@ const path = require('path'); // This module provides utilities for files and di
 
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
-
+ 
 // Using the connect function to connect to our mongoDB database
-mongoose.connect(`mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@cluster0.jmsjk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
-  { useNewUrlParser: true, 
-    useUnifiedTopology: true
-})
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+mongoose
+	.connect(`mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@cluster0.jmsjk.mongodb.net/${process.env.DATABASE_NAME}?retryWrites=true&w=majority`,
+		{ useNewUrlParser: true, useUnifiedTopology: true }
+	)
+	.then(() => console.log('Connexion à MongoDB réussie !'))
+	.catch(() => console.log('Connexion à MongoDB échouée !'));
 
 
 const app = express();
